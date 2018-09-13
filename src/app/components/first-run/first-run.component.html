@@ -1,0 +1,93 @@
+<div class="container">
+
+
+  <div class="sub-header">
+    <h1>{{'PAGES.FIRST_RUN.TITLE' | translate}}</h1>
+    <p>{{'PAGES.FIRST_RUN.SUBTITLE' | translate}}</p>
+  </div>
+  <div class="content">
+    <mat-card>
+      <mat-horizontal-stepper linear #stepper>
+        <mat-step [stepControl]="appSettingsForm" [optional]="isOptional">
+          <form [formGroup]="appSettingsForm">
+            <ng-template matStepLabel>{{'PAGES.FIRST_RUN.STEP1' | translate}}</ng-template>
+            <div class="step-inputs">
+                <mat-form-field>
+                    <input matInput placeholder="{{'PAGES.FIRST_RUN.APPNAME' | translate}}" formControlName="appName" required (keyup)="appNameChange($event)">
+                    <mat-error *ngIf="appSettingsForm.get('appName').hasError('required')">
+                      {{'PAGES.FIRST_RUN.NAME_ERROR' | translate}}
+                    </mat-error>
+                  </mat-form-field>
+                <mat-radio-group formControlName="lang" (change)="langChange($event)">
+                  <mat-radio-button value="en">{{'SHARED.ENGLISH' | translate}}</mat-radio-button>
+                  <mat-radio-button value="ar">{{'SHARED.ARABIC' | translate}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <div class="step-actions">
+              <span class="spacer"></span>
+              <button mat-raised-button color="primary" mat-button matStepperNext [disabled]="appSettingsForm.invalid">{{'SHARED.NEXT' | translate}}
+                <i class="material-icons" *ngIf="getDir() == 'ltr'">chevron_right</i>
+                <i class="material-icons" *ngIf="getDir() == 'rtl'">chevron_left</i>
+              </button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="userForm">
+          <form [formGroup]="userForm">
+            <ng-template matStepLabel>{{'PAGES.FIRST_RUN.STEP2' | translate}}</ng-template>
+            <div class="step-inputs">
+              <mat-form-field>
+                <input matInput placeholder="{{'PAGES.FIRST_RUN.USERNAME_INPUT' | translate}}" formControlName="name" required>
+                <mat-error *ngIf="userForm.get('name').hasError('required')">
+                  {{'PAGES.FIRST_RUN.USERNAME_ERROR' | translate}}
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input type="password" matInput placeholder="{{'PAGES.FIRST_RUN.PASSWORD_INPUT' | translate}}" formControlName="password" required>
+                <mat-error *ngIf="userForm.get('password').hasError('required')">
+                  {{'PAGES.FIRST_RUN.PASSWORD_ERROR' | translate}}
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input type="password" matInput placeholder="{{'PAGES.FIRST_RUN.REPEAT_PASSWORD_INPUT' | translate}}" formControlName="repeatPassword" required>
+                <mat-error *ngIf="userForm.get('repeatPassword').hasError('required')">
+                  {{'PAGES.FIRST_RUN.REPEAT_PASSWORD_ERROR' | translate}}
+                </mat-error>
+                <mat-error *ngIf="userForm.get('repeatPassword').hasError('passwordMismatch')">
+                  {{'PAGES.FIRST_RUN.REPEAT_PASSWORD_VALID' | translate}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="step-actions">
+              <button color="primary" mat-button matStepperPrevious>
+                  <i class="material-icons" *ngIf="getDir() == 'rtl'">chevron_right</i>
+                  <i class="material-icons" *ngIf="getDir() == 'ltr'">chevron_left</i>
+                {{'SHARED.PREV' | translate}}
+              </button>
+              <button color="primary" (click)="addUser(userForm.value)" mat-raised-button mat-button matStepperNext [disabled]="userForm.invalid">{{'SHARED.NEXT' | translate}}
+                <i class="material-icons" *ngIf="getDir() == 'ltr'">chevron_right</i>
+                <i class="material-icons" *ngIf="getDir() == 'rtl'">chevron_left</i>
+                </button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>{{'PAGES.FIRST_RUN.STEP3' | translate}}</ng-template>
+          {{'PAGES.FIRST_RUN.STEP3_COMPLETED' | translate}}
+          <div class="step-actions">
+              <button color="primary" mat-button matStepperPrevious>
+                  <i class="material-icons" *ngIf="getDir() == 'rtl'">chevron_right</i>
+                  <i class="material-icons" *ngIf="getDir() == 'ltr'">chevron_left</i>
+                {{'SHARED.PREV' | translate}}
+              </button>
+
+            <button color="primary" mat-raised-button mat-button (click)="setup()" [disabled]="saveInProgress">
+              <span *ngIf="!saveInProgress" class="btn-inner"><i class="material-icons">save</i> <p>{{'SHARED.SAVE' | translate}}</p></span>
+              <span *ngIf="saveInProgress" class="btn-inner"><mat-spinner color="accent" diameter="30"></mat-spinner> <p>{{'SHARED.SAVING' | translate}}</p></span>
+            </button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </mat-card>
+  </div>
+</div>

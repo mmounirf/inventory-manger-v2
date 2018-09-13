@@ -1,0 +1,21 @@
+.menu-btn{
+  font-weight: bolder;
+}
+
+.navigation{
+  width: 20%;
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+}
+
+.mat-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  span{
+    margin: 0 10px;
+    width: 100%;
+  }
+}
+

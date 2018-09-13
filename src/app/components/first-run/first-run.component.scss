@@ -1,0 +1,29 @@
+@import '../../../variables.scss';
+
+    mat-horizontal-stepper {
+      margin: 20px!important;
+    }
+
+    .step-inputs{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      mat-form-field{
+        width: 100%;
+      }
+
+      mat-radio-button{
+        margin: 20px;
+      }
+    }
+
+    .step-actions{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+

@@ -1,0 +1,57 @@
+<div class="dialog-header mat-elevation-z6">
+  <h2 mat-dialog-title>{{'SHARED.PAYMENT' | translate: {value: (cart.length)} }}</h2>
+  <span class="spacer"></span>
+  <button mat-icon-button color="warn" mat-dialog-close tabindex="-1"><i class="material-icons">close</i></button>
+</div>
+<mat-dialog-content>
+  <div class="tableHeader">
+    <span class="spacer"></span>
+    <p class="unit-price">{{'SHARED.UNIT_PRICE' | translate}}</p>
+    <p class="total-price">{{'SHARED.TOTAL_PRICE' | translate}}</p>
+  </div>
+  <div class="itemWrapper" *ngFor="let item of productsToBeSold; let i = index; last as isLast">
+    <div class="row">
+      <div class="col remove">
+        <button mat-icon-button color="warn" (click)="removeItem(i)">
+          <i class="material-icons">delete</i>
+        </button>
+      </div>
+      <div class="col name">{{i+1}}-{{item.name}}</div>
+      <div class="col unit-price">{{item.price | number:'1.0-2'}}</div>
+      <div class="col multiplier">x {{item.quantityToSell}}</div>
+      <div class="col total-price">{{item.price * item.quantityToSell | number:'1.0-2'}}</div>
+      <div class="col actions">
+        <button mat-icon-button color="warn" [disabled]="!canDecrease(i)" (click)="decreaseItem(i)">
+          <i class="material-icons">remove_circle_outline</i>
+        </button>
+        <button mat-icon-button color="primary" [disabled]="!canIncrease(i)" (click)="increaseItem(i)">
+          <i class="material-icons">add_circle_outline</i>
+        </button>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+  <div class="footer-wrapper">
+      <div class="total-title">
+          <h3>{{'SHARED.TOTAL' | translate}}</h3>
+          <h3>{{'SHARED.PAID' | translate}}</h3>
+          <h3>{{'SHARED.CHANGE' | translate}}</h3>
+        </div>
+        <div class="total-values">
+            <h4 [innerHTML]="total | number:'1.0-2'"></h4>
+            <span class="spacer"></span>
+            <mat-form-field appearance="outline" [floatLabel]="'never'" class="paidInput">
+                <mat-label></mat-label>
+                <input [formControl]="paidInput" matInput placeholder="{{'SHARED.PAID' | translate}}" value="0" type="number" min="total">
+                <mat-error *ngIf="paidInput.invalid">{{'SHARED.PAYMENT_ERROR' | translate}}</mat-error>
+            </mat-form-field>
+            <span class="spacer"></span>
+            <h4 [innerHTML]="(total-paidInput.value) | number:'1.0-2'"></h4>
+        </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" [disabled]="paidInput.invalid" (click)="paymentComplete()">
+    {{'SHARED.FINISH_PAYMENT' | translate}}
+  </button>
+</mat-dialog-actions>

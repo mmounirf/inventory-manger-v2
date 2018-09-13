@@ -1,17 +1,61 @@
-.container {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+@import '../../../variables.scss';
 
-  background: url(../../../assets/background.jpg) no-repeat center fixed;
-  -webkit-background-size: cover; /* pour anciens Chrome et Safari */
-  background-size: cover; /* version standardisée */
-
-  .title {
-    color: white;
-    margin:0;
-    padding:50px 20px;
+.container{
+  .sub-header{
+    padding: 20px 0;
   }
+  .content{
+    mat-card{
+      padding: 0px;
+      .cardHeader{
+        background-color: $primary;
+        border-radius: 2px 2px 0 0;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        h2{
+          margin: 0;
+          color: $white;
+          margin: 0 20px;
+        }
+        button{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-left: 20px;
+          color: $white;
+        }
+      }
+      mat-card-content{
+        padding: 24px;
+        .searchField{
+          width: 100%;
+          font-weight: bolder;
+          margin-bottom: 20px;
+        }
 
+        .mat-column-name {max-width: 400px;}
+        .mat-column-category {max-width: 200px;}
+        .mat-column-barcode {max-width: 300px;}
+        .mat-column-actions, .mat-column-quantity, .mat-column-price {max-width: 150px;}
+
+        .barcode-img{
+          height: 100px;
+        }
+
+        ul.catList{
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          padding-right: 20px;
+        }
+      }
+    }
+
+  }
+}
+
+
+mat-dialog-container{
+  padding: 0;
 }

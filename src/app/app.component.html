@@ -1,1 +1,20 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <mat-toolbar-row>
+    <h3><i class="fas fa-store"></i> {{getSettings().appName}}</h3>
+    <span class="spacer"></span>
+    <div class="navigation" *ngIf="getUser()">
+        <button mat-stroked-button [routerLink]="['/']">{{'SHARED.INVENTORY' | translate}} <i class="material-icons">local_grocery_store</i></button>
+        <button mat-stroked-button [routerLink]="['/pos']">{{'SHARED.POS' | translate}} <i class="material-icons">power_settings_new</i></button>
+    </div>
+    <span class="spacer"></span>
+    <button mat-button [matMenuTriggerFor]="menu" class="menu-btn" *ngIf="getUser()">
+      {{'SHARED.WELCOME' | translate:{value: getUser().name} }}
+      <i class="material-icons">keyboard_arrow_down</i>
+    </button>
+    <mat-menu #menu="matMenu" [overlapTrigger]="false">
+      <button mat-menu-item><i class="material-icons">settings</i><span>{{'SHARED.SETTINGS' | translate}}</span></button>
+      <button mat-menu-item><i class="material-icons">exit_to_app</i><span>{{'SHARED.EXIT'| translate}}</span></button>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>
 <router-outlet></router-outlet>

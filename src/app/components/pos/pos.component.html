@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="search-wrapper">
+        <mat-form-field class="searchField">
+            <input matInput [(ngModel)]="searchTerm" (ngModelChange)="search(searchTerm)" placeholder="{{'PAGES.HOME.SEARCH_PLACEHOLDER' | translate}}">
+            <mat-hint>{{'PAGES.HOME.SEARCH_HINT' | translate}}</mat-hint>
+            <i class="material-icons" matPrefix>search</i>
+          </mat-form-field>
+    </div>
+  <div class="products">
+      <mat-card matRipple *ngFor="let product of products | search:'name,category,price,quantity,barcode':searchTerm" (click)="addToCart(product)" [ngClass]="product.quantity < 1 ? 'disabled' : ''">
+
+        <div class="barcode">
+            <ng-container [ngSwitch]="product.barcode.length">
+                <img class="barcode-img" *ngSwitchCase="2" jsbarcode-format="EAN2" attr.jsbarcode-value="{{product.barcode}}" />
+                <img class="barcode-img" *ngSwitchCase="5" jsbarcode-format="EAN5" attr.jsbarcode-value="{{product.barcode}}" />
+                <img class="barcode-img" *ngSwitchCase="8" jsbarcode-format="EAN8" attr.jsbarcode-value="{{product.barcode}}" />
+                <img class="barcode-img" *ngSwitchCase="12" jsbarcode-format="UPC" attr.jsbarcode-value="{{product.barcode}}" />
+                <img class="barcode-img" *ngSwitchCase="13" jsbarcode-format="EAN13" attr.jsbarcode-value="{{product.barcode}}" />
+                <img class="barcode-img" *ngSwitchDefault jsbarcode-format="CODE128" attr.jsbarcode-value="{{product.barcode}}" />
+              </ng-container>
+        </div>
+        <div class="info">
+          <h4>{{product.name}}</h4>
+          <p>{{'SHARED.PRICE' | translate}} {{product.price}}</p>
+          <p>{{'SHARED.AVAILABLE_QUANTITY' | translate: {value: product.quantity} }}</p>
+          <mat-chip-list *ngIf="product.category">
+              <mat-chip *ngFor="let category of product.category" color="primary">{{category}}</mat-chip>
+            </mat-chip-list>
+        </div>
+      </mat-card>
+  </div>
+<div class="cart-wrapper">
+    <button (click)="openCart()" [disabled]="cart.length < 1 ? true : false" class="cart" mat-fab color="primary" matBadge="{{cart.length}}" matBadgeColor="accent"><i class="material-icons">local_grocery_store</i> </button>
+
+</div>
+</div>

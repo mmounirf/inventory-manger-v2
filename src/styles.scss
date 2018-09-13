@@ -1,7 +1,136 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "assets/css/fonts.css";
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~@angular/material/theming";
+@import 'variables.scss';
+
+
 html, body {
   margin: 0;
   padding: 0;
-
   height: 100%;
+  font-family: 'Cairo';
+  font-size: 16px!important;
+}
+
+html, body { height: 100%; }
+body { margin: 0; }
+
+
+h3{
+  font-weight: bolder!important;
+}
+
+input {
+  line-height: 1.3em!important;
+}
+
+.mat-sort-header-button {
+  font-size: 16px!important;
+  font-weight: bolder!important;
+}
+
+$custom-typography: mat-typography-config(
+  $font-family: 'Cairo'
+);
+
+@include mat-core($custom-typography);
+
+mat-toolbar{
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+
+.spacer{
+  flex: 1 1 auto;
+}
+
+span.mat-button-wrapper{
+  display: flex;
+  align-items: center;
+}
+
+
+.btn-inner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  p{
+    margin: 0 20px;
+  }
+}
+
+
+.container{
+  display: flex;
+  flex-direction: column;
+
+  .sub-header{
+    background-color: $primary;
+    padding: 50px 0;
+    h1, p{
+      color: $white;
+      text-align: center;
+      margin: 0;
+    }
+  }
+
+  .content{
+    margin: 50px;
+
+    &.cards{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      mat-card{
+        width: 40%;
+      }
+    }
+  }
+}
+
+
+mat-dialog-container{
+  padding: 0!important;
+  overflow: hidden!important;
+
+}
+
+
+mat-form-field{
+  &.full-width{
+    width: 100%!important;
+  }
+}
+/*RTL Styles*/
+body[dir="rtl"]{
+  .mat-menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+  }
+
+
+    form {
+      flex-direction: row-reverse;
+    }
+
+    .dialog-header{
+      flex-direction: row-reverse;
+    }
+
+    .paidInput{
+      direction: rtl;
+    }
+
+    .total-values, .total-title{
+      flex-direction: row-reverse;
+    }
+
 }

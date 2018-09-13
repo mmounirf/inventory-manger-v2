@@ -1,0 +1,67 @@
+<div class="dialog-header mat-elevation-z6">
+  <h2 mat-dialog-title>{{'SHARED.ADD_PRODUCT' | translate}}</h2>
+  <span class="spacer"></span>
+  <button mat-icon-button color="warn" mat-dialog-close tabindex="-1"><i class="material-icons">close</i></button>
+</div>
+<mat-dialog-content>
+  <mat-card>
+    <mat-card-content>
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+          <input matInput placeholder="{{'PAGES.ADD_PRODUCT.INPUTS.NAME' | translate}}" formControlName="name" required>
+          <mat-error *ngIf="productForm.get('name').hasError('required')">
+            {{'PAGES.ADD_PRODUCT.INPUTS.REQUIRED_ERROR' | translate}}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="number" matInput placeholder="{{'PAGES.ADD_PRODUCT.INPUTS.PRICE' | translate}}" formControlName="price" min="1"
+            required>
+          <mat-error *ngIf="productForm.get('price').hasError('required')">
+            {{'PAGES.ADD_PRODUCT.INPUTS.REQUIRED_ERROR' | translate}}
+          </mat-error>
+          <mat-error *ngIf="productForm.get('price').hasError('min')">
+            {{'PAGES.ADD_PRODUCT.INPUTS.MIN_ERROR' | translate}}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="number" matInput placeholder="{{'PAGES.ADD_PRODUCT.INPUTS.QUANTITY' | translate}}" formControlName="quantity"
+            required>
+          <mat-error *ngIf="productForm.get('quantity').hasError('required')">
+            {{'PAGES.ADD_PRODUCT.INPUTS.REQUIRED_ERROR' | translate}}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="{{'PAGES.ADD_PRODUCT.INPUTS.BARCODE' | translate}}" formControlName="barcode" required>
+          <mat-error *ngIf="productForm.get('barcode').hasError('required')">
+            {{'PAGES.ADD_PRODUCT.INPUTS.REQUIRED_ERROR' | translate}}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-chip-list #catList>
+            <mat-chip *ngFor="let cat of cats" [selectable]="true" [removable]="true" (removed)="remove(cat)">
+              {{cat}}
+              <i class="material-icons" matChipRemove>cancel</i>
+            </mat-chip>
+            <input placeholder="{{'PAGES.ADD_PRODUCT.INPUTS.CATEGORY' | translate}}" #catInput [formControl]="category" [matAutocomplete]="auto"
+              [matChipInputFor]="catList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="false"
+              (matChipInputTokenEnd)="add($event)">
+
+          </mat-chip-list>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+            <mat-option *ngFor="let cat of filteredCats | async" [value]="cat">
+              {{cat}}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-hint>{{'PAGES.ADD_PRODUCT.INPUTS.CATEGORY_HINT' | translate}}</mat-hint>
+
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="productForm.invalid">
+    {{'SHARED.ADD_PRODUCT' | translate}}
+    <i class="material-icons">save</i>
+  </button>
+</mat-dialog-actions>

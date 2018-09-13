@@ -1,7 +1,70 @@
 {
   "PAGES": {
-      "HOME": {
-          "TITLE": "App works !"
+    "FIRST_RUN": {
+      "TITLE": "Welcome to Inventory Manager v2",
+      "SUBTITLE": "Setup wizard will walk you through the very first steps to use the application.",
+      "APPNAME": "Application Name",
+      "NAME_ERROR": "Application Name is required",
+      "STEP1": "Application Settings",
+      "STEP2": "User Settings",
+      "USERNAME_INPUT": "Your Name",
+      "USERNAME_ERROR": "Your Name is required.",
+      "PASSWORD_INPUT": "Your Password.",
+      "PASSWORD_ERROR": "Password is required",
+      "REPEAT_PASSWORD_INPUT": "Repeat Password",
+      "REPEAT_PASSWORD_ERROR": "Repeat Password is required",
+      "REPEAT_PASSWORD_VALID": "Passwords don't match",
+      "STEP3": "Done",
+      "STEP3_COMPLETED": "ِApplication Settings has been completed.!"
+    },
+    "HOME": {
+      "SEARCH_PLACEHOLDER": "Search for a product",
+      "SEARCH_HINT": "Search for a product by type product's name, price, quantity, category or barcode",
+      "TITLE": "Inventory"
+    },
+    "ADD_PRODUCT": {
+      "INPUTS": {
+        "NAME": "Product Name",
+        "PRICE": "Product Price",
+        "QUANTITY": "Product Quantity",
+        "BARCODE": "Product Barcode",
+        "CATEGORY": "Product Category",
+        "REQUIRED_ERROR": "This field is required",
+        "MIN_ERROR": "Price cannot be lower than 1",
+        "CATEGORY_HINT": "Type category name then press ENTER to add"
       }
+    }
+  },
+  "SHARED": {
+    "ARABIC": "Arabic",
+    "ENGLISH": "English",
+    "NEXT": "Next",
+    "PREV": "Previous",
+    "SAVE": "Save",
+    "SAVING": "Saving",
+    "WELCOME": "Welcome {{value}}",
+    "SETTINGS": "Settings",
+    "EXIT": "Close Application",
+    "NAME": "Name",
+    "PRICE": "Price",
+    "QUANTITY": "Quantity",
+    "BARCODE": "Barcode",
+    "CATEGORY": "Category",
+    "EDIT": "Edit {{value}}",
+    "DELETE": "Delete {{value}}",
+    "ALLPRODUCTS": "All Products",
+    "ADD_PRODUCT": "Add Product",
+    "EXPORT": "Export as Excel",
+    "INVENTORY": "Inventory",
+    "POS": "Sale Screen",
+    "AVAILABLE_QUANTITY": "Available Quantity {{value}}",
+    "PAYMNET": "Pay for {{value}} products",
+    "TOTAL": "Total",
+    "UNIT_PRICE": "Unit Price",
+    "TOTAL_PRICE": "Total PRice",
+    "PAID": "Paid",
+    "CHANGE": "Remainder",
+    "PAYMENT_ERROR": "Paid amount cannot be less than the total ammount",
+    "FINISH_PAYMENT": "Complete Payment and Print Receipt"
   }
 }

@@ -1,5 +1,87 @@
 <div class="container">
-  <h1 class="title">
-    {{ 'PAGES.HOME.TITLE' | translate }}
-  </h1>
+  <div class="sub-header">
+    <h1>{{'PAGES.HOME.TITLE' | translate}}</h1>
+  </div>
+  <div class="content">
+
+    <mat-card>
+      <div class="cardHeader">
+        <h2>{{'SHARED.ALLPRODUCTS' | translate}}</h2>
+        <span class="spacer"></span>
+        <button mat-icon-button (click)="addProduct()" [matTooltipPosition]="'above'" matTooltip="{{'SHARED.ADD_PRODUCT' | translate}}">
+          <i class="material-icons">add_shopping_cart</i>
+        </button>
+        <button mat-icon-button (click)="exportProducts()" [matTooltipPosition]="'above'" matTooltip="{{'SHARED.EXPORT' | translate}}">
+          <i class="material-icons">grid_on</i>
+        </button>
+      </div>
+      <mat-card-content>
+        <mat-form-field class="searchField">
+          <input matInput (keyup)="search($event.target.value)" placeholder="{{'PAGES.HOME.SEARCH_PLACEHOLDER' | translate}}">
+          <mat-hint>{{'PAGES.HOME.SEARCH_HINT' | translate}}</mat-hint>
+          <i class="material-icons" matPrefix>search</i>
+
+
+        </mat-form-field>
+        <mat-table [dataSource]="allProducts" matSort>
+
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>{{'SHARED.NAME' | translate}}</mat-header-cell>
+            <mat-cell *matCellDef="let product">{{product.name}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>{{'SHARED.PRICE' | translate}}</mat-header-cell>
+            <mat-cell *matCellDef="let product">{{product.price}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="category">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>{{'SHARED.CATEGORY' | translate}}</mat-header-cell>
+            <mat-cell *matCellDef="let product">
+              <ul class="catList">
+                <li *ngFor="let cat of product.category">{{cat}}</li>
+              </ul>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="quantity">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>{{'SHARED.QUANTITY' | translate}}</mat-header-cell>
+            <mat-cell *matCellDef="let product">{{product.quantity}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="barcode">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>{{'SHARED.BARCODE' | translate}}</mat-header-cell>
+            <mat-cell *matCellDef="let product">
+              <ng-container [ngSwitch]="product.barcode.length">
+                <img class="barcode-img" *ngSwitchCase="2" jsbarcode-format="EAN2" attr.jsbarcode-value="{{product.barcode}}" />
+                <img class="barcode-img" *ngSwitchCase="5" jsbarcode-format="EAN5" attr.jsbarcode-value="{{product.barcode}}" />
+                <img class="barcode-img" *ngSwitchCase="8" jsbarcode-format="EAN8" attr.jsbarcode-value="{{product.barcode}}" />
+                <img class="barcode-img" *ngSwitchCase="12" jsbarcode-format="UPC" attr.jsbarcode-value="{{product.barcode}}" />
+                <img class="barcode-img" *ngSwitchCase="13" jsbarcode-format="EAN13" attr.jsbarcode-value="{{product.barcode}}" />
+                <img class="barcode-img" *ngSwitchDefault jsbarcode-format="CODE128" attr.jsbarcode-value="{{product.barcode}}" />
+              </ng-container>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let product">
+              <button mat-icon-button color="primary" (click)="action('edit', product)" [matTooltipPosition]="'above'" matTooltip="{{'SHARED.EDIT' | translate:{value: product.name} }}">
+                <i class="material-icons">create</i>
+              </button>
+              <button mat-icon-button color="warn" (click)="action('edit', product)" [matTooltipPosition]="'above'" matTooltip="{{'SHARED.DELETE' | translate:{value: product.name} }}">
+                <i class="material-icons">delete</i>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;">
+          </mat-row>
+
+        </mat-table>
+
+        <mat-paginator [pageSizeOptions]="[10, 20, 30]"></mat-paginator>
+
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
