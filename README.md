@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [![Angular Logo](./logo-angular.jpg)](https://angular.io/) [![Electron Logo](./logo-electron.jpg)](https://electron.atom.io/)
 
 [![Travis Build Status][build-badge]][build]
@@ -102,3 +103,7 @@ Note that you can't use Electron or NodeJS native libraries in this case. Please
 [github-star]: https://github.com/maximegris/angular-electron/stargazers
 [twitter]: https://twitter.com/intent/tweet?text=Check%20out%20angular-electron!%20https://github.com/maximegris/angular-electron%20%F0%9F%91%8D
 [twitter-badge]: https://img.shields.io/twitter/url/https/github.com/maximegris/angular-electron.svg?style=social
+=======
+# inventory-manger-v2
+
+>>>>>>> 30446843ce62214e072972412ad8d2730a3f105b
